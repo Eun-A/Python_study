@@ -1,0 +1,1003 @@
+# 소스코드 1번 -----------------------------------------------------------
+html="""
+<html>
+     <head>
+          <title> test web </title>
+     </head>
+     <body>
+          <p align="center"> text contents </p>
+          <img src="c:\Python34\Koala.jpg" width="500" height="300">
+     </body>
+</html> """
+
+from bs4 import BeautifulSoup
+bs=BeautifulSoup(html)
+print(bs.prettify() )
+
+bs.find('title')
+#-------------------------------------------------------------------------
+
+# 소스코드 2번 -----------------------------------------------------------
+html="""
+<html>
+     <head>
+          <title> test web </title>
+     </head>
+     <body>
+          <p align="center"> text contents </p>
+          <img src="c:\Python34\Koala.jpg" width="500" height="300">
+     </body>
+</html> """
+
+from bs4 import BeautifulSoup
+bs=BeautifulSoup(html)
+print(bs.prettify() )
+
+bs.find('title')
+#-------------------------------------------------------------------------
+
+# 소스코드 3번 -----------------------------------------------------------
+bs.find('p')
+#-------------------------------------------------------------------------
+#소스코드 4번 ------------------------------------------------------------
+bs.find('a')
+#-------------------------------------------------------------------------
+
+#소스코드 5번-------------------------------------------------------------
+html="""
+<html>
+     <head>
+          <title> test web </title>
+     </head>
+     <body>
+          <p align="center"> text contents 1 </p>
+          <p align="right">  text contents 2 </p>
+          <p align="left">   text contents 3 </p>
+          <img src="c:\Python34\Koala.jpg" width="500" height="300">
+     </body>
+</html> """
+
+bs=BeautifulSoup(html)
+#-------------------------------------------------------------------------
+
+#소스코드 6번 ------------------------------------------------------------
+bs.find('p',align="center")
+bs.find('p',align="right")
+bs.find('p',align="left")
+#-------------------------------------------------------------------------
+
+# 소스코드 7번------------------------------------------------------------
+html="""
+<html>
+     <head>
+          <title> test web </title>
+     </head>
+     <body>
+          <p align="center"> text contents 1 </p>
+          <p align="center"> text contents 2 </p>
+          <p align="center"> text contents 3 </p>
+          <img src="c:\Python34\Koala.jpg" width="500" height="300">
+     </body>
+</html> """
+
+bs=BeautifulSoup(html)
+#-------------------------------------------------------------------------
+
+# 소스코드 8번 -----------------------------------------------------------
+bs.find_all('p')
+# ------------------------------------------------------------------------
+
+# 소스코드 9번 -----------------------------------------------------------
+
+head_tag = bs.find('head')
+head_tag
+head_tag.find('title')
+head_tag.find('p') # 자신의 태그안에 없는 태그입니다.
+#-------------------------------------------------------------------------
+
+# 소스코드 10번 ----------------------------------------------------------
+body_tag = bs.find('body')
+list1 = body_tag.find_all(['p','img'])
+
+for tag in list1:
+	print(tag)
+#-------------------------------------------------------------------------
+
+# 소스코드 11번 ----------------------------------------------------------
+bs.find_all('p')
+#-------------------------------------------------------------------------
+
+# 소스코드 12번 ----------------------------------------------------------
+import re
+tags = bs.find_all(re.compile("^p"))
+tags
+#-------------------------------------------------------------------------
+
+# 소스코드 13번 ----------------------------------------------------------
+bs.find_all(align="center")
+#-------------------------------------------------------------------------
+
+# 소스코드 14번 ----------------------------------------------------------
+bs.find_all(width="500")
+#-------------------------------------------------------------------------
+
+# 소스코드 15번 ----------------------------------------------------------
+bs.find_all(text=" text contents 1 ")
+#-------------------------------------------------------------------------
+
+# 소스코드 16번 -----------------------------------------------------------
+import re
+bs.find_all(text=re.compile(" text +"))
+#--------------------------------------------------------------------------
+
+# 소스코드 17번 -----------------------------------------------------------
+bs.find_all('p',limit=2)
+#-------------------------------------------------------------------------
+
+# 소스코드 18번 -----------------------------------------------------------
+body_tag = bs.find('body')
+p_tag = body_tag.find('p')
+p_tag
+p_tag.string
+#--------------------------------------------------------------------------
+
+# 소스코드 19번 -----------------------------------------------------------
+strings = body_tag.strings
+for string in strings :
+	print(string)
+#--------------------------------------------------------------------------
+
+# 소스코드 20번 -----------------------------------------------------------
+body_tag = bs.find('body')
+body_tag.get_text()
+#--------------------------------------------------------------------------
+
+# 소스코드 21번 -----------------------------------------------------------
+body_tag.get_text(strip=True)
+#--------------------------------------------------------------------------
+
+# 소스코드 22번 -----------------------------------------------------------
+body_tag.get_text('-',strip=True)
+#--------------------------------------------------------------------------
+
+#소스코드 23번-------------------------------------------------------------
+
+html="""
+<html>
+     <head>
+          <title> test web </title>
+     </head>
+     <body>
+          <p class="ptag black"  align="center"> text contents 1 </p>
+          <p class="ptag yellow" align="center"> text contents 2 </p>
+          <p class="ptag red"    align="center"> text contents 3 </p>
+          <img src="c:\Python34\Koala.jpg" width="500" height="300">
+     </body>
+</html> """
+
+bs=BeautifulSoup(html)
+p_tag=bs.find('p')
+p_tag['class']
+#--------------------------------------------------------------------------
+
+# 소스코드 24번 -----------------------------------------------------------
+p_tag['class'][1]="white"
+p_tag['class']
+#--------------------------------------------------------------------------
+
+# 소스코드 25번 -----------------------------------------------------------
+p_tag['id'] = "P-TAG"
+p_tag['id']
+#--------------------------------------------------------------------------
+
+# 소스코드 26번 -----------------------------------------------------------
+p_tag['align']
+del p_tag['align']
+p_tag['align']
+# --------------------------------------------------------------------------
+
+# 소스코드 27번 ------------------------------------------------------------
+p_tag.attrs
+#---------------------------------------------------------------------------
+
+# 소스코드 28번 -------------------------------------------------------------
+
+html="""
+<html>
+     <head>
+          <title> test web </title>
+     </head>
+     <body>
+          <p class="ptag black"  align="center"> text contents 1 </p>
+          <p class="ptag yellow" align="center"> text contents 2 </p>
+          <p class="ptag red"    align="center"> text contents 3 </p>
+          <img src="c:\Python34\Koala.jpg" width="500" height="300">
+     </body>
+</html> """
+
+bs=BeautifulSoup(html)
+body_tag = bs.find('body')
+body_tag
+# ---------------------------------------------------------------------------
+
+# 소스코드 29번 -------------------------------------------------------------
+for child in body_tag.children :
+	print(child)
+# ---------------------------------------------------------------------------
+
+# 소스코드 30번 --------------------------------------------------------------
+img_tag = bs.find('img')
+img_tag.parent
+# ----------------------------------------------------------------------------
+
+# 소스코드 31번 --------------------------------------------------------------
+p_tag=bs.find('p')
+p_tag
+p_tag.find_parent('body')
+# ----------------------------------------------------------------------------
+
+# 소스코드 32번 --------------------------------------------------------------
+p_tag.find_parent('html')
+# ----------------------------------------------------------------------------
+
+# 소스코드 33번 ---------------------------------------------------------------
+title_tag = bs.find('title')
+title_tag.find_parent('head')
+#-----------------------------------------------------------------------------
+
+# 소스코드 34번 ---------------------------------------------------------------
+html="""
+<html>
+     <head>
+          <title> test web </title>
+     </head>
+     <body>
+          <p class="ptag black"  align="center"> text contents 1 </p>
+          <p class="ptag yellow" align="center"> text contents 2 </p>
+          <p class="ptag red"    align="center"> text contents 3 </p>
+          <img src="c:\Python34\Koala.jpg" width="500" height="300">
+
+          <div class="container">
+                <p class="text">  </p>
+          </div>
+     </body>
+</html> """
+
+bs=BeautifulSoup(html)
+# -----------------------------------------------------------------------------
+
+# 소스코드 35번 ----------------------------------------------------------------
+
+p_tag = bs.find('p',class_='text')
+parents = p_tag.find_parents( )
+for parent in parents :
+	print(parent.name)
+# -----------------------------------------------------------------------------
+	
+# 소스코드 36번 ----------------------------------------------------------------
+
+import urllib.request
+import urllib.parse
+from bs4 import BeautifulSoup
+defaultURL = 'http://openapi.naver.com/search?&'
+key = 'key=이곳에 독자님의 Open API 키를 입력하세요'
+target = '&target=news'  #naver news 를 검색하는 부분입니다
+sort = '&sort=sim'
+start = '&start=1'
+display = '&display=100'
+query = '&query='+urllib.parse.quote_plus(str(input("검색어를 입력하세요: ")))
+
+fullURL = defaultURL + key + target + sort + start + display + query
+
+print(fullURL)
+file = open("C:\\Python34\\naver_news.txt","w",encoding='utf-8')
+
+f = urllib.request.urlopen(fullURL)
+resultXML = f.read( )
+xmlsoup = BeautifulSoup(resultXML,'html.parser')
+
+items = xmlsoup.find_all('item')
+
+for item in items :
+     file.write('-----------------------------------------\n')
+     file.write('뉴스제목 : ' + item.title.get_text(strip=True) + '\n')
+     file.write('요약내용 : ' + item.description.get_text(strip=True) + '\n')
+     file.write('\n')
+
+file.close( )
+# -----------------------------------------------------------------------------
+
+
+
+# 소스코드 37번 ---------------------------------------------------------------
+
+import urllib.request
+import urllib.parse
+from bs4 import BeautifulSoup
+defaultURL = 'http://openapi.naver.com/search?&'
+key = 'key=이곳에 독자님의 Open API 키를 입력하세요'
+target = '&target=blog'  #naver blog 를 검색하는 부분입니다
+sort = '&sort=sim'
+start = '&start=1'
+display = '&display=100'
+query = '&query='+urllib.parse.quote_plus(str(input("검색어를 입력하세요: ")))
+
+fullURL = defaultURL + key + target + sort + start + display + query
+
+print(fullURL)
+file = open("C:\\Python34\\naver_blog.txt","w",encoding='utf-8')
+
+f = urllib.request.urlopen(fullURL)
+resultXML = f.read( )
+xmlsoup = BeautifulSoup(resultXML,'html.parser')
+
+items = xmlsoup.find_all('item')
+
+for item in items :
+     file.write('-----------------------------------------\n')
+     file.write('블로그 제목 : ' + item.title.get_text(strip=True) + '\n')
+     file.write('요약   내용 : ' + item.description.get_text(strip=True) + '\n')
+     file.write('\n')
+
+file.close( )
+
+# -------------------------------------------------------------------------------
+
+
+# 소스코드 38번 -----------------------------------------------------------------
+
+import urllib.request
+import urllib.parse
+from bs4 import BeautifulSoup
+defaultURL = 'http://openapi.naver.com/search?&'
+key = 'key=이곳에 독자님의 Open API 키를 입력하세요'
+target = '&target=news'  #naver news 를 검색하는 부분입니다
+sort = '&sort=sim'
+start = '&start=1'
+display = '&display=100'
+query = '&query='+urllib.parse.quote_plus(str(input("검색어를 입력하세요: ")))
+
+fullURL = defaultURL + key + target + sort + start + display + query
+
+print(fullURL)
+file = open("C:\\Python34\\naver_news.txt","w",encoding='utf-8')
+
+f = urllib.request.urlopen(fullURL)
+resultXML = f.read( )
+xmlsoup = BeautifulSoup(resultXML,'html.parser')
+
+items = xmlsoup.find_all('item')
+
+for item in items :
+     file.write('-----------------------------------------\n')
+     file.write('뉴스제목 : ' + item.title.get_text(strip=True) + '\n')
+     file.write('요약내용 : ' + item.description.get_text(strip=True) + '\n')
+     file.write('원문링크 : ' + item.link.get_text(strip=True) + '\n')
+     file.write('\n')
+
+file.close( )
+
+#-------------------------------------------------------------------------------------
+
+# 소스코드 39번 -----------------------------------------------------------------------
+import urllib.parse
+import urllib.request
+import re 
+
+def input_query( ):
+	q = urllib.parse.quote_plus(str(input("검색할 단어를 입력하세요: ")))
+	return "&query=" + q
+
+def bind_url( ) :
+    default_url = "http://openapi.naver.com/search?target=image&display=100&"
+    API_Key = "key=이곳에 Naver Open API Key 값을 넣어주세요"
+    query = input_query( )
+    start = "&start=" + str(1)
+    sort = "sort=" + "sim"
+    full_url = default_url + API_Key + query + start + sort
+    return full_url
+
+def fetch_contents_from_url( ):
+    url = bind_url( )
+    r = urllib.request.urlopen(url)
+    html = r.read( )
+    return html
+
+def extract_text_in_tags(tags,tagname="title") :
+    txt = []
+    reg = "[^<" +tagname+">][^<]+"
+    for tag in tags :
+        txt.append(re.search(reg,tag).group() )
+    return txt
+
+def get_contents_from_html( ):
+    html = fetch_contents_from_url( )
+    title_tags = re.findall("<title>[^<]+</title>",html.decode('utf-8'))
+    link_tags = re.findall("<link>[^<]+</link>",html.decode('utf-8'))
+    titles = extract_text_in_tags(title_tags,tagname = "title")
+    links = extract_text_in_tags(link_tags,tagname = 'link')
+    f = open("image.html","w")
+    f.write("<html><body>")
+    for i in range(1,len(titles)) :
+        f.write("<p>"+titles[i]+"</p>")
+        f.write("<img src="+links[i]+"/>")
+    f.write("</body></html>")
+    f.close( )
+
+get_contents_from_html( )
+
+# ---------------------------------------------------------------------------------------
+
+# 소스코드 40번 -------------------------------------------------------------------------
+from bs4 import BeautifulSoup
+import urllib.parse
+import urllib.request
+import os
+
+apikey = "834c47de609b373e495bba237bbfe583"
+default_url = "https://apis.daum.net/search/web?output=xml&apikey="
+
+def get_save_path():
+    save_path = str(input("저장할 위치와 파일명을 적어주세요. :" ))
+    save_path = save_path.replace("\\", "/")
+    if not os.path.isdir(os.path.split(save_path)[0]):
+        os.mkdir(os.path.split(save_path)[0])
+    return save_path
+
+def get_result_xml():
+    search = str(input("검색할 문장을 입력하세요: "))
+    search = urllib.parse.quote(search)
+    full_url = default_url + apikey + '&q=' + search
+    res = urllib.request.urlopen(full_url).read()
+    return res
+
+def fetch_result_xml():
+    result_xml = get_result_xml()
+    bs = BeautifulSoup(result_xml, 'html.parser')
+    items = bs.find_all("item")
+    f = open(get_save_path(), 'w', encoding='utf-8')
+
+    for item in items:
+        date = item.find("pubdate").get_text(strip=True)
+        title = item.find("title").get_text(strip=True)
+        desc = item.find("description").get_text(strip=True)
+        link = item.find("link").get_text(strip=True)
+        url = item.find("url").get_text(strip=True)
+        f.write("==" * 30 + '\n')
+        f.write("게시물 날짜 : " + date + '\n')
+        f.write("제목 : " + title + '\n')
+        f.write("설명 : " + desc + '\n')
+        f.write("링크 : " + link + '\n')
+        f.write("URL : " + url + '\n')
+        
+        f.write("==" * 30 + '\n')
+
+fetch_result_xml()
+
+# -----------------------------------------------------------------------------------------
+
+
+# 소스코드 41번 ---------------------------------------------------------------------------
+
+import urllib.request
+from bs4 import BeautifulSoup
+import re
+import os
+
+list_url = "http://eungdapso.seoul.go.kr/Shr/Shr01/Shr01_lis.jsp"
+detail_url = "http://eungdapso.seoul.go.kr/Shr/Shr01/Shr01_vie.jsp"
+
+def get_save_path():
+    save_path = str(input("저장할 위치와 파일명을 적어주세요. :" ))
+    save_path = save_path.replace("\\", "/")
+
+    if not os.path.isdir(os.path.split(save_path)[0]):
+        os.mkdir(os.path.split(save_path)[0])
+
+    return save_path
+
+def fetch_list_url():
+    request_header = urllib.parse.urlencode({"page" : "1"})
+    request_header = request_header.encode("utf-8")
+    url = urllib.request.Request(list_url, request_header)
+    res = urllib.request.urlopen(url).read().decode("utf-8")
+
+    bs = BeautifulSoup(res, "html.parser")
+    listbox = bs.find_all("li", class_="pclist_list_tit2")
+    params = []
+    for i in listbox:
+        params.append(re.search("[0-9]{14}", i.find("a")["href"]).group())
+    
+    return params
+
+def fetch_detail_url():
+    params = fetch_list_url()
+
+    f = open(get_save_path, 'w', encoding="utf-8")
+    
+    for p in params:
+        
+        request_header = urllib.parse.urlencode({"RCEPT_NO" : str(p)})
+        request_header = request_header.encode("utf-8")
+
+        url = urllib.request.Request(detail_url, request_header)
+        res = urllib.request.urlopen(url).read().decode("utf-8")
+        
+        bs = BeautifulSoup(res, "html.parser")
+        div = bs.find("div", class_="form_table")
+        
+        tables = div.find_all("table")
+
+        info = tables[0].find_all("td")
+
+        title = info[0].get_text(strip=True)
+        date = info[1].get_text(strip=True)
+        
+        question = tables[1].find("div", class_="table_inner_desc").get_text(strip=True)
+        answer = tables[2].find("div", class_="table_inner_desc").get_text(strip=True)
+        
+
+        f.write("==" * 30 + "\n")
+        
+        f.write(title + "\n")
+        f.write(date + "\n")
+        f.write(question + "\n")
+        f.write(answer + "\n")
+        
+        f.write("==" * 30 + "\n")
+
+fetch_detail_url()
+# ------------------------------------------------------------------------------------------------
+
+# 소스코드 42번 -----------------------------------------------------------------------------------
+# -*- coding: utf-8 -*-
+# posts는 내가 작성한 글만을 내 타임라인에서 가져옵니다. 
+#다른 사람이 남긴 글까지 모조리 가져오고 싶다면 feed를 사용 해야 합니다.
+
+import facebook
+obj = facebook.GraphAPI(access_token="각자의 Access-Token 을 적으세요")
+limit = int(raw_input("몇건의 게시물을 검색할까요? "))
+response = obj.get_connections(id="me", connection_name="posts", limit=limit)
+f = open("C:/Python27/posts.txt", "w")
+
+for data in response[u"data"]:
+f.write("==" * 30 + "\n")
+f.write("게시물 작성자 : " + data[u"from"][u"name"].encode("utf-8") + "\n")
+f.write("게시물 아이디 : " + data[u"from"][u"id"].encode("utf-8") + "\n")
+f.write("최종 업데이트 시간 : " + data[u"updated_time"].encode("utf-8") + "\n")
+f.write("게시물 링크 : " + data[u"actions"][0][u"link"].encode("utf-8") + "\n")
+if u"message" in data:
+	f.write("게시물 내용 : " + data[u"message"].encode("utf-8") + "\n")
+if u"picture" in data:
+	f.write("게시물 사진 이름 : " + data[u"name"].encode("utf-8") + "\n")
+	f.write("사진 주소 : " + data[u"picture"].encode("utf-8") + "\n")
+if u"description" in data:
+	f.write("사진 설명 : " + data[u"description"].encode("utf-8") + "\n")
+f.write("==" * 30 + "\n")
+f.close()
+# --------------------------------------------------------------------------------------------
+
+# 소스코드 43번 -----------------------------------------------------------------------------
+# -*- coding: cp949 -*-
+# 특정 포스트에서 특정인이 쓴 댓글 찾기
+import facebook
+# 생성한 액세스 토큰을 인수로 전달하고 객체를 돌려 받습니다.
+obj = facebook.GraphAPI(access_token="자신의 Access Token 을 쓰세요")
+postid = str(raw_input("포스트 아이디를 입력하세요: "))
+userid = raw_input(u"찾으실 유저의 이름을 입력하세요: ")
+
+response = obj.get_connections(id=postid, connection_name="comments", limit=25)
+_find = []
+while response[u"data"]:
+for data in response[u"data"]:
+	try :
+	   if userid == data[u"from"][u"name"].encode("cp949"):
+	      	_data = {}
+		_data["id"] = data[u"from"][u"id"]
+		_data["name"] = data[u"from"][u"name"]
+		_data["created_time"] = data[u"created_time"]
+		_data["message"] = data[u"message"]
+		_find.append(_data)
+	except UnicodeEncodeError as e:
+	   if userid.decode("cp949") == data[u"from"][u"name"]:
+		_data = {}
+		_data["id"] = data[u"from"][u"id"]
+		_data["name"] = data[u"from"][u"name"]
+		_data["created_time"] = data[u"created_time"]
+		_data["message"] = data[u"message"]
+		_find.append(_data)
+if u"paging" in response and u"after" in response[u"paging"][u"cursors"]:
+	after = response[u"paging"][u"cursors"][u"after"]
+	   response = obj.get_connections(id=postid, connection_name="comments", limit=25, after=after)
+else:
+	break
+f = open("C:\\Python27\\list.txt", "w")
+for data in _find:
+	f.write("==" * 30 + "\n")
+	f.write(data["created_time"].encode("utf-8") + "\n")
+	f.write(data["message"].encode("utf-8") + "\n")
+	f.write(data["id"].encode("utf-8") + "\n")
+	f.write(data["name"].encode("utf-8") + "\n")
+	f.write("==" * 30 + "\n")
+f.close()
+# ----------------------------------------------------------------------------------------------------
+
+
+# 소스코드 44번 ---------------------------------------------------------------------------------------
+
+import urllib.request
+from bs4 import BeautifulSoup
+
+target_url = 'http://52.68.130.249/textboard/'
+
+# 게시글의 제목과 목록을 가져오는 함수
+def fetch_post_list():				
+    URL = target_url
+    res = urllib.request.urlopen(URL)
+    html = res.read()
+
+    soup = BeautifulSoup(html, 'html.parser')
+    table = soup.find('table', class_='kingkongboard-table')
+
+    title_list = table.find_all('td', class_='kingkongboard-list-title')
+
+    links = []
+    links = [td.find('a')['href'] for td in title_list]
+
+    return links
+
+result = fetch_post_list( )
+print(result)
+# ---------------------------------------------------------------------------------------------------
+
+#소스코드 45번 ---------------------------------------------------------------------------------------
+# 게시글의 세부 내역을  가져오는 함수
+def fetch_post_contents(link) :
+    URL = link
+    res = urllib.request.urlopen(URL)
+    html = res.read( )
+    soup = BeautifulSoup(html,'html.parser')
+    content_table = soup.find('div',id='kingkongboard-read-table')
+    
+    # 글제목 , 등록 날짜 가져오는 부분
+    title_section = content_table.find('div',class_='title-section')
+    title = title_section.find('h1').text
+    date = title_section.find('div',class_='regist-date').find('h2').text
+
+    # 글쓴이 정보를 가져오는 부분
+    writer = content_table.find('div',class_='regist-writer').find('h2').text
+
+    # 콘텐츠를 가져오는 부분
+    content = content_table.find('div', class_='content-section').find('p').text
+
+    # 결과를 모아서 출력하는 부분
+    return {
+         'title' : title,
+         'date' : date,
+         'writer' : writer,
+         'content' : content
+         }
+
+ # 실제 결과를 출력하는 부분
+links =fetch_post_list( )
+for link in links :
+     result = fetch_post_contents(link)
+     print(result)   
+
+# -------------------------------------------------------------------------------------------------------
+
+# 소스코드 46번 -----------------------------------------------------------------------------------------
+import urllib.request
+from bs4 import BeautifulSoup
+
+target_url = 'http://52.68.130.249/textboard/'
+
+# 게시글의 제목과 목록을 가져오는 함수
+def fetch_post_list():				
+    URL = target_url
+    res = urllib.request.urlopen(URL)
+    html = res.read()
+
+    soup = BeautifulSoup(html, 'html.parser')
+    table = soup.find('table', class_='kingkongboard-table')
+
+    title_list = table.find_all('td', class_='kingkongboard-list-title')
+
+    links = []
+    links = [td.find('a')['href'] for td in title_list]
+
+    return links
+
+result = fetch_post_list( )
+print(result)
+
+# 게시글의 세부 내역을  가져오는 함수
+def fetch_post_contents(link) :
+    URL = link
+    res = urllib.request.urlopen(URL)
+    html = res.read( )
+    soup = BeautifulSoup(html,'html.parser')
+    content_table = soup.find('div',id='kingkongboard-read-table')
+    
+    # 글제목 , 등록 날짜 가져오는 부분
+    title_section = content_table.find('div',class_='title-section')
+    title = title_section.find('h1').text
+    date = title_section.find('div',class_='regist-date').find('h2').text
+
+    # 글쓴이 정보를 가져오는 부분
+    writer = content_table.find('div',class_='regist-writer').find('h2').text
+
+    # 콘텐츠를 가져오는 부분
+    content = content_table.find('div', class_='content-section').find('p').text
+
+    # 결과를 모아서 출력하는 부분
+    return {
+         'title' : title,
+         'date' : date,
+         'writer' : writer,
+         'content' : content
+         }
+
+ # 실제 결과를 출력하는 부분
+links =fetch_post_list( )
+for link in links :
+     result = fetch_post_contents(link)
+     print(result)   
+#---------------------------------------------------------------------------------------------------
+
+# 소스코드 47번 -----------------------------------------------------------------------------------------
+# Open API 가 없는 사이트용 크롤러- 이미지 크롤링 추가됨
+
+import urllib.request
+from bs4 import BeautifulSoup
+
+target_url = 'http://52.68.130.249/textboard/'
+
+# 게시글의 제목과 목록을 가져오는 함수
+def fetch_post_list():				
+    URL = target_url
+    res = urllib.request.urlopen(URL)
+    html = res.read()
+
+    soup = BeautifulSoup(html, 'html.parser')
+    table = soup.find('table', class_='kingkongboard-table')
+
+    title_list = table.find_all('td', class_='kingkongboard-list-title')
+
+    links = []
+    links = [td.find('a')['href'] for td in title_list]
+
+    return links
+
+result = fetch_post_list( )
+print(result)
+
+# 게시글의 세부 내역을  가져오는 함수
+def fetch_post_contents(link) :
+    URL = link
+    res = urllib.request.urlopen(URL)
+    html = res.read( )
+    soup = BeautifulSoup(html,'html.parser')
+    content_table = soup.find('div',id='kingkongboard-read-table')
+    
+# 글제목 , 등록 날짜 가져오는 부분
+    title_section = content_table.find('div',class_='title-section')
+    title = title_section.find('h1').text
+    date = title_section.find('div',class_='regist-date').find('h2').text
+
+# 글쓴이 정보를 가져오는 부분
+    writer = content_table.find('div',class_='regist-writer').find('h2').text
+
+# 콘텐츠를 가져오는 부분
+    content = content_table.find('div', class_='content-section').find('p').text
+
+# 이미지를 가져오는 부분
+    image = content_table.find('div',class_='content-section').find('img')
+    image_url = '' # 여기 공백 들어가면 안됩니다
+    if image :
+        image_url = image['src']
+
+# 결과를 모아서 출력하는 부분
+    return {
+         'title' : title,
+         'date' : date,
+         'writer' : writer,
+         'content' : content,
+         'image' : image_url
+         }
+
+ # 실제 결과를 출력하는 부분
+links =fetch_post_list( )
+for link in links :
+     result = fetch_post_contents(link)
+     print(result)   
+
+# -----------------------------------------------------------------------------------------------------
+
+# 소스코드 48 -----------------------------------------------------------------------------------------
+
+# 댓글을 가져오는 부분
+    comments = [ ]
+    comment_section = content_table.find('div',class_='comment-section')
+    list_wrapper = comment_section.find('div',class_='list-wrapper')
+    comment_list = list_wrapper.find_all('div',class_='each-comment')
+    if comment_list :
+        for comment in comment_list :
+            comment_box = comment.find('div',class_='comment-box')
+            comment_content = comment_box.find('div',class_='comment-content')
+
+            div_writer = comment_content.find('div',class_='comment-content-writer')
+            writer = div_writer.find('span',class_='author').text
+            date = div_writer.find('span',class_='date').text
+
+            div_text = comment_content.find('div',class_='comment-content-text')
+            comment_text = div_text.find('h2').text
+
+            comments.append( {
+                'writer' : writer ,
+                'date' : date ,
+                'comment_text' : comment_text
+                } )
+
+# 결과를 모아서 출력하는 부분
+    return {
+         'title' : title,
+         'date' : date,
+         'writer' : writer,
+         'content' : content,
+         'image' : image_url ,
+         'comments' : comments
+         }
+
+# 실제 결과를 출력하는 부분
+links =fetch_post_list( )
+for link in links :
+     result = fetch_post_contents(link)
+     print(result)                
+#------------------------------------------------------------------------------------------------------
+
+
+
+# 소스코드 49 ------------------------------------------------------------------------------------------
+# Open API 가 없는 사이트용 크롤러- 전체 완성코드(댓글 및 파일저장기능포함)
+
+import urllib.request
+from bs4 import BeautifulSoup
+
+target_url = 'http://52.68.130.249/textboard/'
+
+# 게시글의 제목과 목록을 가져오는 함수
+def fetch_post_list():				
+    URL = target_url
+    res = urllib.request.urlopen(URL)
+    html = res.read()
+
+    soup = BeautifulSoup(html, 'html.parser')
+    table = soup.find('table', class_='kingkongboard-table')
+
+    title_list = table.find_all('td', class_='kingkongboard-list-title')
+
+    links = []
+    links = [td.find('a')['href'] for td in title_list]
+
+    return links
+
+result = fetch_post_list( )
+print(result)
+
+# 게시글의 세부 내역을  가져오는 함수
+def fetch_post_contents(link) :
+    URL = link
+    res = urllib.request.urlopen(URL)
+    html = res.read( )
+    soup = BeautifulSoup(html,'html.parser')
+    content_table = soup.find('div',id='kingkongboard-read-table')
+    
+    # 글제목 , 등록 날짜 가져오는 부분
+    title_section = content_table.find('div',class_='title-section')
+    title = title_section.find('h1').text
+    date = title_section.find('div',class_='regist-date').find('h2').text
+
+    # 글쓴이 정보를 가져오는 부분
+    writer = content_table.find('div',class_='regist-writer').find('h2').text
+
+    # 콘텐츠를 가져오는 부분
+    content = content_table.find('div', class_='content-section').find('p').text
+
+    # 이미지를 가져오는 부분
+    image = content_table.find('div',class_='content-section').find('img')
+    image_url = ''
+    if image :
+        image_url = image['src']
+
+    # 댓글을 가져오는 부분
+    comments = [ ]
+    comment_section = content_table.find('div',class_='comment-section')
+    list_wrapper = comment_section.find('div',class_='list-wrapper')
+    comment_list = list_wrapper.find_all('div',class_='each-comment')
+    if comment_list :
+        for comment in comment_list :
+            comment_box = comment.find('div',class_='comment-box')
+            comment_content = comment_box.find('div',class_='comment-content')
+
+            div_writer = comment_content.find('div',class_='comment-content-writer')
+            writer = div_writer.find('span',class_='author').text
+            date = div_writer.find('span',class_='date').text
+
+            div_text = comment_content.find('div',class_='comment-content-text')
+            comment_text = div_text.find('h2').text
+
+            comments.append( {
+                'writer' : writer ,
+                'date' : date ,
+                'comment_text' : comment_text
+                } )
+
+    # 결과를 모아서 출력하는 부분
+    return {
+         'title' : title,
+         'date' : date,
+         'writer' : writer,
+         'content' : content,
+         'image' : image_url ,
+         'comments' : comments
+         }
+
+ # 실제 결과를 출력하는 부분
+links =fetch_post_list( )
+for link in links :
+     result = fetch_post_contents(link)
+     print(result)                         
+                            
+                              
+# 위 내용을 파일로 저장하는 부분
+def crawler_running():
+    links = fetch_post_list()
+    with open('post.txt', 'w', encoding='utf-8') as f:
+        for link in links:
+            result = fetch_post_contents(link)
+            f.write('===' * 30 + '\n')
+            f.write('글 제목 : ' + result['title'] + '\n')
+            f.write('날짜 : ' + result['date'] + '\n')
+            f.write('글쓴이 : ' + result['writer'] + '\n')
+            f.write('글 내용 : ' + result['content'] + '\n')
+            
+            if result['comments']:
+                f.write('-' * 30)
+                f.write('댓글')
+                f.write('-' * 30 + '\n')
+                count = 1
+                for comment in result['comments']:
+                    f.write('댓글 ' + str(count) + '\n')
+                    f.write('댓글 작성자 : ' + comment['writer'] + '\n')
+                    f.write('댓글 등록 날짜 : ' + comment['date'] + '\n')
+                    f.write('댓글 내용 : ' + comment['comment_text'] + '\n')
+                    count += 1
+            f.write('===' * 30 + '\n')
+            
+            if result['image']:
+                image = open( result['title'] + '.jpg', 'wb')
+                down_img = urllib.request.urlopen(result['image'])
+                image.write(down_img.read())
+                image.close()
+        f.close()
+
+crawler_running()
+
+                      
+                            
+                              
+                     
+                            
+                              
+
+
+
+
+
+
+
+
+
+
+	
